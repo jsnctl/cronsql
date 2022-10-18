@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  test-database:
+  database:
     image: postgres:14.1-alpine
     restart: always
     environment:
@@ -8,7 +8,10 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-  test-cronsql:
+  cronsql:
     build:
       context: .
     restart: always
+  harness:
+    build:
+      context: harness
