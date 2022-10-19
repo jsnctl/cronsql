@@ -2,15 +2,19 @@ import pandas as pd
 import sqlalchemy.exc
 from sqlalchemy import create_engine
 
-engine = create_engine("postgresql://postgres:postgres@database:5432")
+engine = create_engine("postgresql://postgres:postgres@database:5432/postgres")
 
 
 def ping():
     try:
-        pd.read_sql(f"""SELECT 1""", engine)
-        return True
+        result = pd.read_sql(f"""
+            SELECT * 
+            FROM example 
+            WHERE timestamp > NOW() - INTERVAL '10 seconds';
+        """, engine)
+        return result
     except sqlalchemy.exc.OperationalError:
-        return False
+        return None
 
 
 print(ping())
