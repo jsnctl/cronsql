@@ -1,3 +1,7 @@
 # cronsql
 
-(Too) easy scheduled SQL queries
+## Roadmap
+
+- [ ] Config from YAML (or similar)
+- [ ] Scheduled SQL—>email
+- [ ] Visualisation
