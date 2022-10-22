@@ -3,21 +3,30 @@ import sqlalchemy.exc
 from sqlalchemy import create_engine
 import yaml
 
-engine = create_engine("postgresql://postgres:postgres@database:5432/postgres")
-
 
 def load_config():
     config = None
+    engine = None
     with open("./config.yaml", "r") as stream:
         try:
             config = yaml.safe_load(stream)
+            host, database, port, user, password = (
+                config["host"],
+                config["database"],
+                config["port"],
+                config["user"],
+                config["password"]
+            )
+            engine = create_engine(
+                f"postgresql://{user}:{password}@{host}:{port}/{database}"
+            )
         except yaml.YAMLError as e:
             print(e)
-    return config
+    return config, engine
 
 
 def ping():
-    config = load_config()
+    config, engine = load_config()
 
     if not config:
         return "error"

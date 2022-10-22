@@ -1,3 +1,8 @@
+host: database
+database: postgres
+port: 5432
+user: postgres
+password: postgres
 query: |
   SELECT *
   FROM example
