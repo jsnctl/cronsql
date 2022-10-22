@@ -25,7 +25,7 @@ def load_config():
     return config, engine
 
 
-def ping():
+def query():
     config, engine = load_config()
 
     if not config:
@@ -38,4 +38,4 @@ def ping():
         return None
 
 
-print(ping())
+print(query())
