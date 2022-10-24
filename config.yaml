@@ -1,8 +1,9 @@
-host: database
-database: postgres
-port: 5432
-user: postgres
-password: postgres
+database:
+  host: database
+  user: postgres
+  password: postgres
+  database: postgres
+  port: 5432
 query: |
   SELECT *
   FROM example

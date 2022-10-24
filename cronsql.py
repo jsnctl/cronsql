@@ -7,15 +7,15 @@ import yaml
 def load_config():
     config = None
     engine = None
-    with open("./config.yaml", "r") as stream:
+    with open("/config.yaml", "r") as stream:
         try:
             config = yaml.safe_load(stream)
             host, database, port, user, password = (
-                config["host"],
-                config["database"],
-                config["port"],
-                config["user"],
-                config["password"]
+                config["database"]["host"],
+                config["database"]["database"],
+                config["database"]["port"],
+                config["database"]["user"],
+                config["database"]["password"]
             )
             engine = create_engine(
                 f"postgresql://{user}:{password}@{host}:{port}/{database}"
