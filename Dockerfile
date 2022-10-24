@@ -1,6 +1,8 @@
 FROM python:3.9-slim-buster
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY cronsql.py .
-COPY config.yaml .
-CMD ["python", "./cronsql.py"]
+RUN apt-get update && apt-get install -y cron
+COPY . .
+COPY config.yaml /config.yaml
+RUN /usr/bin/crontab crontab
+CMD ["cron", "-f"]
