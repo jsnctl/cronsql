@@ -1,35 +1,34 @@
 import pandas as pd
 import sqlalchemy.exc
-from sqlalchemy import create_engine
 import yaml
+from sqlalchemy import create_engine
 
 
 def load_config():
-    config = None
-    engine = None
-    with open("/config.yaml", "r") as stream:
+    with open("config.yaml", "r") as stream:
         try:
             config = yaml.safe_load(stream)
-            host, database, port, user, password = (
-                config["database"]["host"],
-                config["database"]["database"],
-                config["database"]["port"],
-                config["database"]["user"],
-                config["database"]["password"]
-            )
-            engine = create_engine(
-                f"postgresql://{user}:{password}@{host}:{port}/{database}"
-            )
         except yaml.YAMLError as e:
             print(e)
-    return config, engine
+    return config
 
 
 def query():
-    config, engine = load_config()
+    config = load_config()
 
     if not config:
         return "error"
+
+    user, password, host, port, database = (
+        config["database"]["user"],
+        config["database"]["password"],
+        config["database"]["host"],
+        config["database"]["port"],
+        config["database"]["database"]
+    )
+    engine = create_engine(
+        f"postgresql://{user}:{password}@{host}:{port}/{database}"
+    )
 
     try:
         result = pd.read_sql(config["query"], engine)
