@@ -1,4 +1,4 @@
-from cronsql import load_config
+from config import load_config
 
 
 def build_crontab():

@@ -1,16 +1,8 @@
 import pandas as pd
 import sqlalchemy.exc
-import yaml
 from sqlalchemy import create_engine
 
-
-def load_config():
-    with open("config.yaml", "r") as stream:
-        try:
-            config = yaml.safe_load(stream)
-        except yaml.YAMLError as e:
-            print(e)
-    return config
+from config import load_config
 
 
 def query():
@@ -37,4 +29,5 @@ def query():
         return None
 
 
-print(query())
+df = query()
+print(df)
