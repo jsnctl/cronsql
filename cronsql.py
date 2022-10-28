@@ -4,12 +4,11 @@ from sqlalchemy import create_engine
 
 from config import load_config
 
+CONFIG_FILE = "config.yaml"
+
 
 def query():
-    config = load_config()
-
-    if not config:
-        return "error"
+    config = load_config(CONFIG_FILE)
 
     user, password, host, port, database = (
         config["database"]["user"],

@@ -3,14 +3,14 @@ import yaml
 from error import ConfigNotFoundException
 
 
-def load_config():
-    if not os.path.exists("config.yaml"):
+def load_config(config_file: str):
+    if not os.path.exists(config_file):
         config_file = "config.yaml.example"
-    else:
-        config_file = "config.yaml"
+
     with open(config_file, "r") as stream:
         try:
             config = yaml.safe_load(stream)
+            return config
         except yaml.YAMLError:
             raise ConfigNotFoundException
-    return config
+

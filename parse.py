@@ -1,8 +1,9 @@
 from config import load_config
+from cronsql import CONFIG_FILE
 
 
 def build_crontab():
-    cron = load_config()["cron"]
+    cron = load_config(CONFIG_FILE)["cron"]
 
     crontab = (
         cron +
