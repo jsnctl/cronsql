@@ -1,0 +1,11 @@
+database:
+  host: database
+  user: postgres
+  password: postgres
+  database: postgres
+  port: 5432
+query: |
+  SELECT *
+  FROM example
+  WHERE timestamp > NOW() - INTERVAL '30 seconds'
+cron: "*/1 * * * *"
